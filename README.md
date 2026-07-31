@@ -14,12 +14,12 @@ A portable agent skill that renders a single **read-only status dashboard** — 
 progress (with progress bars), what's queued, what's blocked, and which services are up.
 One glance, no re-explaining the format.
 
-Part of the [BRAINFRAME skills](https://github.com/The9thRealm/brainframe-skills) collection.
+Part of the [BRAINFRAME skills](https://github.com/CjPetersonIX/brainframe-skills) collection.
 
 ## Install (one line)
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/The9thRealm/brainframe-qpulse/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/CjPetersonIX/brainframe-qpulse/main/install.sh | bash
 ```
 
 Installs to `~/.claude/skills/qpulse/` by default. Override the target with `SKILLS_DIR=...`.
