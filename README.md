@@ -1,68 +1,49 @@
 # brainframe-qpulse
 
-```
-██████╗ ██████╗  █████╗ ██╗███╗   ██╗███████╗██████╗  █████╗ ███╗   ███╗███████╗
-██╔══██╗██╔══██╗██╔══██╗██║████╗  ██║██╔════╝██╔══██╗██╔══██╗████╗ ████║██╔════╝
-██████╔╝██████╔╝███████║██║██╔██╗ ██║█████╗  ██████╔╝███████║██╔████╔██║█████╗
-██╔══██╗██╔══██╗██╔══██║██║██║╚██╗██║██╔══╝  ██╔══██╗██╔══██║██║╚██╔╝██║██╔══╝
-██████╔╝██║  ██║██║  ██║██║██║ ╚████║██║     ██║  ██║██║  ██║██║ ╚═╝ ██║███████╗
-╚═════╝ ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚═╝  ╚═══╝╚═╝     ╚═╝  ╚═╝╚═╝  ╚═╝╚═╝     ╚═╝╚══════╝
-                    S K I L L   ·   Q   P U L S E
-```
+Portable skill: render a read-only **Q Pulse** — in progress, queue, blocked, services, this brain's CKPT.
 
-A portable agent skill that renders a single **read-only status dashboard** — what's in
-progress (with progress bars), what's queued, what's blocked, and which services are up.
-One glance, no re-explaining the format.
+Companion to [brainframe-handoff](https://github.com/CjPetersonIX/brainframe-handoff).  
+Public wrapper skill — not the full BrainFrame OS / MasterQ implementation.
 
-Part of the [BRAINFRAME skills](https://github.com/The9thRealm/brainframe-skills) collection.
-
-## Install (one line)
+## Install
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/The9thRealm/brainframe-qpulse/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/CjPetersonIX/brainframe-qpulse/main/install.sh | bash
 ```
 
-Installs to `~/.claude/skills/qpulse/` by default. Override the target with `SKILLS_DIR=...`.
+Default: `~/.claude/skills/qpulse/`.
 
-## What you get
+## Cadence
 
-A boxed dashboard like:
+| Command | Who | When | CKPT effect |
+|---|---|---|---|
+| `/qpulse` (this skill) | any seat on **this** brain | every 30–60 min, or on ask | `LOCAL` + 1 |
+| network fold (`/masterq` or your hub) | one hub brain | ~24 h if you run a fleet | `MASTER` + 1, every brain `LOCAL` → `.00` |
+
+A single LITE box only needs `/qpulse`. The fold exists when you sync multiple brains.
+
+## Stamp on the pulse
 
 ```
-╔══════════════════════════════════════════════════════════════╗
-║  Q PULSE  ·  2026-05-30 11:10 PT                             ║
-╚══════════════════════════════════════════════════════════════╝
-
-── IN PROGRESS ──────────────────────────────────────────────────
-### API-204 — Rate limiter
-  ✅ token-bucket core
-  ⏳ wiring middleware
-  ☐ tests
-
-── QUEUE (next 5 unblocked) ─────────────────────────────────────
-1. API-205 — per-route overrides
-
-── BLOCKED ──────────────────────────────────────────────────────
-- API-206 — needs prod Redis URL from ops
-
-── SERVICES / DAEMONS ───────────────────────────────────────────
-api:     ✅ active
-worker:  ❌ inactive
+<NODE-ID> CKPT <MASTER>.<LOCAL>
 ```
 
-## Configure
+Same rules as the handoff skill: millidigit is a **counter**, not a float; all seats on this brain share it; publish the pulse file on `main`.
 
-On first run the skill helps you create a `qpulse.config.json` describing your task file,
-optional nodes, and the read-only health checks for your services. See
-[`SKILL.md`](SKILL.md) for the full schema and rendering rules.
+## Board
 
-## Adopting in other CLIs
+```
+╔════════════════════════════════════════════════════════════╗
+║  Q PULSE  ·  <date> <TZ>  ·  <NODE-ID> CKPT <M>.<L>      ║
+╚════════════════════════════════════════════════════════════╝
 
-`SKILL.md` is plain Markdown. Any agent that can read a system-prompt fragment can adopt it:
-- **Claude Code** — installed automatically as a skill (above).
-- **Other CLIs** — point your agent at `SKILL.md`, or paste its body into your rules/system
-  prompt. The format and steps are tool-agnostic; only the host's task-list call differs.
+── IN PROGRESS ─
+── QUEUE ─
+── BLOCKED ─
+── SERVICES ─
+── RAM / HEALTH (LITE boxes) ─
+```
 
-## License
+Config and rules: [`SKILL.md`](SKILL.md).
 
-Public reference skill. Adopt freely; supply your own config.
+Public reference skill. Adopt freely.
