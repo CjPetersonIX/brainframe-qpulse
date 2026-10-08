@@ -1,3 +1,5 @@
+![BRAINFRAME](brainframe-banner-magenta.png)
+
 # brainframe-qpulse
 
 Portable Q Pulse skill. Not MasterQ. Not BrainFrame OS.
